@@ -37,14 +37,20 @@ function Contact() {
     setIsSubmitting(true);
     
     const formData = new FormData(e.currentTarget);
-    // Anti-AV trick to hide the access key and URL
-    formData.append("access_key", "68c60623-f654-4ce4-b6c1-f4dcd025decb");
+    const object = Object.fromEntries(formData.entries());
+    object.access_key = "68c60623-f654-4ce4-b6c1-f4dcd025decb";
+    const json = JSON.stringify(object);
+    
     const endpoint = ["https://api", ".web3", "forms.com/submit"].join("");
 
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json,
       });
 
       if (response.ok) {
