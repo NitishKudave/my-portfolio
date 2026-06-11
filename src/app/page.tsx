@@ -37,26 +37,22 @@ function Contact() {
     setIsSubmitting(true);
     
     const formData = new FormData(e.currentTarget);
-    const object = Object.fromEntries(formData.entries());
-    object.access_key = "68c60623-f654-4ce4-b6c1-f4dcd025decb";
-    const json = JSON.stringify(object);
+    formData.append("access_key", "68c60623-f654-4ce4-b6c1-f4dcd025decb");
     
     const endpoint = ["https://api", ".web3", "forms.com/submit"].join("");
 
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: json,
+        body: formData,
       });
 
       if (response.ok) {
         setIsSuccess(true);
         (e.target as HTMLFormElement).reset();
         setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        console.error("Web3Forms Error:", await response.text());
       }
     } catch (error) {
       console.error(error);
