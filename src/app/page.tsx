@@ -37,13 +37,14 @@ function Contact() {
     setIsSubmitting(true);
     
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", "68c60623-f654-4ce4-b6c1-f4dcd025decb");
-    
-    const endpoint = ["https://api", ".web3", "forms.com/submit"].join("");
+    const endpoint = "https://formspree.io/f/xgoblydz";
 
     try {
       const response = await fetch(endpoint, {
         method: "POST",
+        headers: {
+          Accept: "application/json"
+        },
         body: formData,
       });
 
@@ -52,7 +53,7 @@ function Contact() {
         (e.target as HTMLFormElement).reset();
         setTimeout(() => setIsSuccess(false), 5000);
       } else {
-        console.error("Web3Forms Error:", await response.text());
+        console.error("Formspree Error:", await response.text());
       }
     } catch (error) {
       console.error(error);
