@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowUpRight } from "lucide-react";
 
 const Github = ({ size = 24 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -14,65 +14,123 @@ const projects = [
     title: "RajNify Music Streaming App",
     tech: ["Flutter", "Firebase", "REST APIs"],
     desc: "Cross-platform music streaming application with dark-themed, Spotify-inspired UI. Features background player, offline storage and real-time search.",
-    github: "https://github.com/NitishKudave/RajNify-App"
+    github: "https://github.com/NitishKudave/RajNify-App",
+    color: "var(--color-neon-blue)",
+    number: "01",
   },
   {
     title: "ICMR NITVAR Institutional Website",
     tech: ["Django", "PostgreSQL", "Bootstrap"],
     desc: "Comprehensive institutional website with secure CMS, role-based access control, and dynamic admin dashboard.",
-    github: "#"
+    github: "#",
+    color: "var(--color-neon-purple)",
+    number: "02",
   },
   {
     title: "AMR Study Portal",
     tech: ["React.js", "Firebase", "Firestore"],
     desc: "Interactive portal for Antimicrobial Resistance research with OAuth 2.0, real-time sync, and Google Cloud Functions.",
-    github: "#"
+    github: "#",
+    color: "var(--color-neon-cyan)",
+    number: "03",
   },
   {
     title: "IAT Platform",
     tech: ["Django", "PostgreSQL", "Render"],
     desc: "Production-grade psychology research platform with secure auth, exact timing measurements, and 99.9% uptime APIs.",
-    github: "#"
-  }
+    github: "#",
+    color: "var(--color-neon-pink)",
+    number: "04",
+  },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-32 w-full max-w-7xl mx-auto px-6 relative z-10">
-      <h2 className="text-4xl font-bold mb-16 text-center">
-        <span className="text-gradient">03.</span> Projects
-      </h2>
-      <div className="grid md:grid-cols-2 gap-8">
-        {projects.map((project, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.5 }}
-            className="glass-card p-8 rounded-2xl flex flex-col h-full hover:border-[var(--color-neon-blue)]/50"
-          >
-            <h3 className="text-2xl font-bold text-white mb-3">{project.title}</h3>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.tech.map(t => (
-                <span key={t} className="text-xs px-3 py-1 rounded-full bg-[var(--color-neon-purple)]/10 text-[var(--color-neon-cyan)] border border-[var(--color-neon-cyan)]/20">
-                  {t}
-                </span>
-              ))}
-            </div>
-            <p className="text-zinc-400 flex-grow mb-6">{project.desc}</p>
-            <div className="flex gap-4">
-              <a href={project.github} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-                <Github size={20} /> Code
-              </a>
-              <a href="#" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-                <ExternalLink size={20} /> Live
-              </a>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+    <section id="projects" className="py-32 w-full max-w-6xl mx-auto px-6 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
+          <span className="section-number">04.</span>
+          <span className="shimmer-text">Projects</span>
+        </h2>
+        <p className="text-zinc-500 text-center mb-16 max-w-lg mx-auto">
+          Selected work that showcases my skills and passion.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.map((project, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="tilt-card"
+            >
+              <div className="glass-card p-7 rounded-2xl flex flex-col h-full group">
+                {/* Header */}
+                <div className="flex items-start justify-between mb-4">
+                  <span
+                    className="text-4xl font-black opacity-10 font-mono"
+                    style={{ color: project.color }}
+                  >
+                    {project.number}
+                  </span>
+                  <div className="flex gap-2">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-9 h-9 rounded-lg flex items-center justify-center text-zinc-500 hover:text-white bg-white/5 hover:bg-white/10 transition-all duration-300"
+                    >
+                      <Github size={16} />
+                    </a>
+                    <a
+                      href="#"
+                      className="w-9 h-9 rounded-lg flex items-center justify-center text-zinc-500 hover:text-white bg-white/5 hover:bg-white/10 transition-all duration-300"
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gradient transition-all duration-300 flex items-center gap-2">
+                  {project.title}
+                  <ArrowUpRight
+                    size={16}
+                    className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </h3>
+
+                {/* Description */}
+                <p className="text-zinc-400 text-sm leading-relaxed flex-grow mb-5">{project.desc}</p>
+
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs px-3 py-1.5 rounded-md font-medium transition-colors duration-300"
+                      style={{
+                        background: `${project.color}10`,
+                        color: project.color,
+                        border: `1px solid ${project.color}20`,
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }
